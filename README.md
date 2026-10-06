@@ -143,6 +143,7 @@ Las distancias representan una aproximación a la accesibilidad geográfica y no
 | Percentil 75 | 1,10 km | 2,17 km |
 | Distancia máxima | 1,81 km | 4,60 km |
 | Media ponderada por población | 0,73 km | 1,75 km |
+
 Fuente: elaboración propia sobre la base de datos del Geoportal de la Municipalidad de San Miguel y datos poblacionales del Censo Nacional 2022.
 Nota: ante la ausencia de información sobre la localización exacta de la población dentro de cada radio censal, se utilizó un punto interior representativo de cada polígono para el cálculo de las distancias. Por lo tanto, los resultados deben interpretarse como indicadores aproximados de proximidad territorial a nivel de radio censal y no como distancias individuales de los habitantes.
 
@@ -158,6 +159,7 @@ Asimismo, el 75% de los radios censales se encuentra a una distancia inferior a 
 | ≤ 1,0 km | 243.221 (74,6%) | 65.518 (20,1%) |
 | ≤ 1,5 km | 303.676 (93,1%) | 132.297 (40,6%) |
 | ≤ 2,0 km | 326.091 (100,0%) | 210.580 (64,6%) |
+
 **Fuente:** elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel y del Censo Nacional de Población, Hogares y Viviendas 2022 (INDEC).
 
 - **74,6%** de la población analizada se encuentra en radios cuyo punto representativo está a ≤1 km de un establecimiento de atención primaria.
@@ -203,6 +205,7 @@ Esto no implica por sí mismo insuficiencia hospitalaria: los hospitales general
 | San Jorge | 2.882 | 43,7% | 1,69 km |
 | Bella Vista Norte | 1.529 | 6,7% | 1,65 km |
 | Santa Clara | 916 | 100% | 1,81 km |
+
 **Fuente:** elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel y del Censo Nacional de Población, Hogares y Viviendas 2022 (INDEC).
 </details>
 El análisis por barrio permite identificar algunos contrastes territoriales. En el caso de los hospitales generales, **Lomas de Mariló, Parque La Luz y San Ambrosio** presentan el 100% de su población analizada en radios ubicados a más de 2 km en línea recta del hospital general más cercano. También se observan proporciones elevadas en **Obligado (96,7%)** y **Santa Brígida (87,7%)**.
@@ -223,6 +226,7 @@ Para cada radio censal se calculó la ruta de menor distancia por red vial hacia
 | Percentil 25 | 1,12 km | 1,46 km |
 | Percentil 75 | 2,17 km | 2,76 km |
 | Máximo | 4,60 km | 10,37 km |
+
 Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel, Censo Nacional 2022 y red vial de OpenStreetMap.
 
 La incorporación de la red vial muestra que la distancia en línea recta puede subestimar de manera importante la separación territorial efectiva entre población y establecimientos.
@@ -237,6 +241,7 @@ La diferencia es especialmente importante en el extremo de la distribución: la 
 | Hospital Santa María | 123 | 148.607 | 45,6% |
 | Hospital Raúl Larcade | 118 | 96.449 | 29,6% |
 | Hospital San Miguel Arcángel | 85 | 81.035 | 24,9% |
+
 **Fuente:** elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel, Censo Nacional 2022 (INDEC) y OpenStreetMap. 
 
 El **Hospital Santa María** resulta ser el hospital general de menor distancia vial para radios que concentran aproximadamente **148.607 habitantes (45,6% de la población analizada)**. Le siguen el Hospital Raúl Larcade, con **29,6%**, y el Hospital San Miguel Arcángel, con **24,9%**.
