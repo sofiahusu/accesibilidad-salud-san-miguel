@@ -114,17 +114,21 @@ Como punto de partida, se analizó la distribución de la población dentro del 
 
 La siguiente figura muestra la densidad poblacional por radio censal, expresada en habitantes por hectárea.
 
+Figura 1. Densidad poblacional por radio censal en el partido de San Miguel. 
+
 ![Densidad poblacional por radio censal](outputs/maps/densidad_poblacion.png)
 
-*Figura 1. Densidad poblacional por radio censal en el partido de San Miguel. Fuente: elaboración propia sobre la base del Censo Nacional de Población, Hogares y Viviendas 2022 y cartografía del Geoportal de la Municipalidad de San Miguel.*
+Fuente: elaboración propia sobre la base del Censo Nacional de Población, Hogares y Viviendas 2022 y cartografía del Geoportal de la Municipalidad de San Miguel.
 
 ### Población y red municipal de salud
 
 La población y los establecimientos sanitarios no se distribuyen homogéneamente dentro del partido. Para analizar esta configuración territorial, se combinaron los radios censales y su densidad poblacional con la localización de los establecimientos de la red municipal de salud. Se integró información georreferenciada de establecimientos sanitarios proveniente del Geoportal de la Municipalidad de San Miguel con información demográfica a nivel de radio censal.
 
+Figura 2. Densidad población por hectárea y red municipal de salud. 
+
 ![Densidad poblacional y red municipal de salud](outputs/maps/densidad_pob_hospitales.png)
 
-*Figura 1. Densidad poblacional por radio censal y distribución de la red municipal de salud del partido de San Miguel. Fuente: elaboración propia a partir del Censo 2022 y del Geoportal de la Municipalidad de San Miguel.*
+Fuente: elaboración propia a partir del Censo 2022 y del Geoportal de la Municipalidad de San Miguel.
 
 ### 1. Proximidad en línea recta (distancia euclídea)
 
@@ -169,13 +173,16 @@ Asimismo, el 75% de los radios censales se encuentra a una distancia inferior a 
 La comparación muestra una diferencia territorial clara entre ambos niveles. La red de atención primaria presenta una mayor proximidad geográfica respecto de la distribución de la población, mientras que los hospitales generales presentan áreas de influencia territorialmente más extensas.
 
 Esto no implica por sí mismo insuficiencia hospitalaria: los hospitales generales concentran prestaciones de mayor complejidad y cumplen una función diferente dentro de la red sanitaria.
+
+Figura 3. Distancia al establecimiento de atención primaria más cercano. 
 ![Distancia a atención primaria](outputs/maps/dist_atencion.png)
 
-*Figura 3. Distancia al establecimiento de atención primaria más cercano. Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel.*
+Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel.
 
+Figura 4. Distancia al hospital general municipal más cercano. 
 ![Distancia a hospitales generales](outputs/maps/dist_hospital.png)
 
-*Figura 4. Distancia al hospital general municipal más cercano. Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel.*
+Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel.
 
 <details>
 <summary>Barrios con población en radios más alejados (línea recta)</summary>
@@ -246,7 +253,11 @@ La diferencia es especialmente importante en el extremo de la distribución: la 
 
 El **Hospital Santa María** resulta ser el hospital general de menor distancia vial para radios que concentran aproximadamente **148.607 habitantes (45,6% de la población analizada)**. Le siguen el Hospital Raúl Larcade, con **29,6%**, y el Hospital San Miguel Arcángel, con **24,9%**.
 Los resultados muestran una configuración territorial diferente entre los establecimientos de atención primaria y los hospitales generales municipales. La red de atención primaria presenta una distribución más descentralizada, con establecimientos próximos incluso a sectores que registran mayores distancias respecto de los hospitales generales. 
+
+Figura 3. Distancia mínima por red vial al hospital general municipal más cercano por radio censal. Partido de San Miguel. 
 ![Distancia a hospitales generales por red vial](outputs/maps/dist_min_hospital.png)
+Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel, datos del Censo Nacional 2022 y red vial de OpenStreetMap, procesada mediante OSMnx.
+Nota: las distancias corresponden al recorrido vial mínimo entre el nodo de la red más próximo al punto representativo de cada radio censal y el nodo más próximo al hospital general municipal seleccionado.
 
 La distribución espacial de las distancias por red vial muestra diferencias territoriales en la proximidad a los hospitales generales municipales. Los radios ubicados en torno a los tres establecimientos presentan, en general, menores recorridos viales, mientras que las mayores distancias tienden a concentrarse en sectores más alejados de estos puntos.
 
@@ -265,6 +276,12 @@ La distribución espacial de las distancias por red vial muestra diferencias ter
 | Trujui | 1.553 | 19,6% | 3,07 km |
 | Sarmiento | 1.006 | 7,5% | 3,22 km |
 
+Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel, datos poblacionales del Censo Nacional 2022 y red vial de OpenStreetMap, procesada mediante OSMnx.
+Nota: el umbral de 3 km se utiliza con fines descriptivos para identificar áreas de menor proximidad vial relativa y no representa un estándar normativo de accesibilidad. La población corresponde a los habitantes de radios censales cuyo punto representativo se encuentra a más de 3 km por red vial del hospital general municipal más cercano.
+
+Obligado concentra la mayor cantidad de población en radios situados a más de 3 km por red vial del hospital general municipal más cercano, con 15.707 habitantes, equivalentes al 81,4% de la población del barrio. Le siguen Santa Brígida, con 11.471 habitantes (60,0%), y Bella Vista Oeste, con 10.785 (49,7%).
+En términos relativos, Parque La Luz, San Ambrosio y Lomas de Mariló presentan una situación particular, dado que el 100% de su población pertenece a radios cuyo punto representativo se encuentra a más de 3 km por red vial del hospital general municipal más cercano. Lomas de Mariló presenta además recorridos elevados dentro de este grupo, mientras que Bella Vista Oeste registra la distancia máxima del análisis, de 10,37 km.
+
 **Tabla 9. Población a más de 2 km por red vial del establecimiento de atención primaria más cercano**
 
 | Barrio | Población >2 km | % del barrio | Distancia máxima |
@@ -277,6 +294,16 @@ La distribución espacial de las distancias por red vial muestra diferencias ter
 | Bella Vista Norte | 1.490 | 6,5% | 2,57 km |
 | Santa Clara | 916 | 100,0% | 2,12 km |
 
+Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel, datos poblacionales del Censo Nacional 2022 y red vial de OpenStreetMap, procesada mediante OSMnx.
+Nota: el umbral de 2 km se utiliza con fines descriptivos para identificar áreas de menor proximidad vial relativa y no representa un estándar normativo de accesibilidad. La población corresponde a los habitantes de radios censales cuyo punto representativo se encuentra a más de 2 km por red vial del establecimiento municipal de atención primaria más cercano.
+
+**Parque La Luz, San Ambrosio y Lomas de Mariló** tienen el **100% de su población analizada a más de 3 km por red vial de un hospital general municipal**. Sin embargo, ninguno de estos barrios presenta población en radios situados a más de 2 km de un establecimiento de atención primaria.
+
+El patrón también aparece, aunque con menor intensidad, en **Obligado y Santa Brígida**.
+
+En términos agregados, solamente el **5,1% de la población analizada** se encuentra a más de 2 km por red vial de un establecimiento de atención primaria.
+
+
 **Lectura conjunta**
 
 - Parque La Luz, San Ambrosio y Lomas de Mariló tienen el 100% de su población a más de 3 km de un hospital general, pero **ninguno** tiene población a más de 2 km de atención primaria. Lo mismo ocurre, en menor grado, con Obligado y Santa Brígida.
@@ -284,11 +311,14 @@ La distribución espacial de las distancias por red vial muestra diferencias ter
 
 ### 3. Cobertura de salud y necesidad potencial
 
+Se utilizó la información de REDACAM- Censo 2022, para conocer la cobertura de salud en cada uno de los radios censales de San Miguel. Como indicador de necesidad potencial de utilización del sistema público se consideró el porcentaje de población que declaró no tener obra social, prepaga ni plan estatal de salud.
+
 - **116.826** de 326.091 habitantes (**35,83%**) no tienen obra social, prepaga ni plan estatal.
 - A nivel de radio, el porcentaje varía entre **2,96% y 76,90%** (mediana **29,93%**).
 - Barrios con mayor proporción sin cobertura: Parque La Luz (63,1%), San Ambrosio (59,3%), Cuartel 2do Cándido Castelló (58,9%), Mitre (58,0%) y Obligado (54,0%).
 
 **Asociación entre necesidad potencial y distancia vial (Spearman)**
+Se utilizó la información de REDACAM- Censo 2022, para conocer la cobertura de salud en cada uno de los radios censales de San Miguel. Como indicador de necesidad potencial de utilización del sistema público se consideró el porcentaje de población que declaró no tener obra social, prepaga ni plan estatal de salud.
 
 | Nivel de atención | ρ | p-valor | Interpretación |
 |---|---|---|---|
