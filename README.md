@@ -1,2 +1,295 @@
-# accesibilidad-salud-san-miguel
-Análisis espacial de la accesibilidad al sistema público de salud en San Miguel mediante datos censales, redes viales e indicadores de cobertura de salud.
+# Accesibilidad territorial a los servicios de salud de San Miguel
+Análisis geoespacial de la proximidad de la población del partido de San Miguel (Buenos Aires, Argentina) a la red municipal de salud, combinando distancias euclídeas, distancias por red vial y una aproximación a la necesidad potencial de uso del sistema público.
+
+## Pregunta principal
+¿Qué tan accesible es territorialmente la red municipal de salud para la población de San Miguel y qué áreas presentan menor proximidad relativa a los establecimientos sanitarios?
+El objetivo es identificar diferencias territoriales en la proximidad a la red municipal de salud y detectar áreas que podrían requerir un análisis prioritario desde la gestión.
+
+## Contenido
+
+- [Resumen de hallazgos](#-resumen-de-hallazgos)
+- [Datos](#-datos)
+- [Metodología](#-metodología)
+- [Resultados](#-resultados)
+  - [1. Proximidad en línea recta](#1-proximidad-en-línea-recta-distancia-euclídea)
+  - [2. Proximidad por red vial](#2-proximidad-por-red-vial)
+  - [3. Cobertura de salud y necesidad potencial](#3-cobertura-de-salud-y-necesidad-potencial)
+- [Conclusiones](#-conclusiones)
+- [Limitaciones](#-limitaciones)
+- [Próximos pasos](#-próximos-pasos)
+- [Fuentes](#-fuentes)
+
+## 🔎 Resumen de hallazgos
+
+| Indicador | Valor |
+|---|---|
+| Radios censales analizados | **326** (99,52% de la población) |
+| Población analizada | **326.091** habitantes |
+| Población ≤ 1 km (línea recta) de atención primaria | **74,6%** |
+| Población ≤ 1 km (línea recta) de hospital general | **20,1%** |
+| Distancia vial media a hospital general | **2,15 km** (vs. 1,68 km euclídea) |
+| Distancia vial máxima a hospital general | **10,37 km** (vs. 4,60 km euclídea) |
+| Población a ≤ 2 km por red vial de atención primaria | **94,9%** |
+| Población sin obra social, prepaga ni plan estatal | **116.826 (35,83%)** |
+
+## 🗂️ Datos
+
+| Fuente | Uso |
+|---|---|
+| Geoportal de la Municipalidad de San Miguel | Ubicación de establecimientos de salud y capas de radios censales |
+| Censo Nacional de Población, Hogares y Viviendas 2022 (INDEC) | Población por radio censal |
+| REDATAM – Censo 2022 | Cobertura de salud por radio censal |
+| OpenStreetMap (vía OSMnx) | Red vial apta para circulación vehicular |
+
+### Establecimientos considerados
+
+| Tipo | Cantidad | Ejemplos |
+|---|---|---|
+| Hospitales generales | 3 | Raúl Larcade, San Miguel Arcángel, Santa María |
+| Primer nivel (centros de salud, CIC, La Posta) | 20 | Centro de Salud 20 de Julio, Ramón Carrillo, UFO, etc. |
+| Hospitales especializados | 5 | Hospital Oftalmológico Mons. Barbich, Salud Mental (Hospital de Día), NET, etc. |
+
+<details>
+<summary>Ver listado completo de establecimientos</summary>
+
+| Nombre | Tipo |
+|---|---|
+| Hospital Raúl Larcade | Hospital general |
+| Hospital San Miguel Arcángel | Hospital general |
+| Hospital Santa María | Hospital general |
+| Centro Integrador Comunitario (C.I.C.) María Lobato | Primer nivel |
+| Centro de Salud 20 de Julio | Primer nivel |
+| Centro de Salud 29 de Septiembre | Primer nivel |
+| Centro de Salud Ana Teresa Barthalot (ex Bella Vista Norte) | Primer nivel |
+| Centro de Salud Camila Rolón | Primer nivel |
+| Centro de Salud Cándido Castelló | Primer nivel |
+| Centro de Salud Cura Brochero (ex 17 de Agosto) | Primer nivel |
+| Centro de Salud Dr. Alberto Sabin (ex Los Paraísos) | Primer nivel |
+| Centro de Salud Dr. Federico Leloir (Barrio Obligado) | Primer nivel |
+| Centro de Salud Dr. Luis Suárez Paris | Primer nivel |
+| Centro de Salud Dr. Raúl Matera (ex Lomas de Mariló) | Primer nivel |
+| Centro de Salud Dr. René Favaloro (ex Trujui) | Primer nivel |
+| Centro de Salud Dra. Marta Antoniazzi | Primer nivel |
+| Centro de Salud Padre Mora | Primer nivel |
+| Centro de Salud Pte. Perón | Primer nivel |
+| Centro de Salud Ramón Carrillo | Primer nivel |
+| Centro de Salud Rodolfo Podestá | Primer nivel |
+| Centro de Salud San Miguel Oeste | Primer nivel |
+| Centro de Salud UFO | Primer nivel |
+| La Posta | Primer nivel |
+| Centro de Intervención Temprana | Hospital especializado |
+| Hospital Oftalmológico Municipal Mons. Barbich | Hospital especializado |
+| Hospital Oftalmológico y Odontológico Central de San Miguel | Hospital especializado |
+| Hospital de Día Salud Mental | Hospital especializado |
+| Nunca es Tarde (NET) | Hospital especializado |
+
+> Los análisis comparan **atención primaria** vs. **hospitales generales** por separado, ya que cumplen funciones distintas dentro del sistema sanitario.
+
+## 🧪 Metodología
+
+1. **Integración de datos**: establecimientos georreferenciados + población por radio censal (Censo 2022).
+2. **Punto representativo**: cada uno de los 326 radios censales se representa con un punto interior de su polígono.
+3. **Distancia euclídea** al establecimiento más cercano, por tipo (primer nivel / hospital general).
+4. **Distancia media ponderada por población**, para que los radios más poblados pesen más en el indicador agregado.
+5. **Distancia por red vial** con [OSMnx](https://github.com/gboeing/osmnx):
+   - Buffer de **5 km** alrededor del límite del partido, para evitar cortes artificiales de recorridos.
+   - Descarga del grafo vial apto para circulación vehicular.
+   - Asociación de radios y establecimientos al nodo más cercano.
+   - Ruta de menor distancia a cada hospital general; se conserva la mínima.
+6. **Cobertura de salud** (REDATAM): % de población sin obra social, prepaga ni plan estatal, como indicador de **necesidad potencial** de uso del sistema público.
+7. **Mapas bivariados**: necesidad potencial × distancia vial, clasificadas en **terciles** (categorías relativas, no normativas).
+8. **Correlación de Spearman** entre necesidad potencial y distancia vial.
+
+### Exclusión de radios
+
+REDATAM identifica 328 radios; **Campo de Mayo** y **Macabi** no están en la capa geoespacial de 326 radios. Además, Campo de Mayo tiene una extensión muy superior a la de los radios urbanos, por lo que un único punto representativo sesgaría la estimación de distancia.
+
+## 📊 Resultados
+
+### Distribución territorial de la población
+
+Como punto de partida, se analizó la distribución de la población dentro del partido de San Miguel. La densidad poblacional presenta una marcada heterogeneidad territorial entre los radios censales, por lo que considerar únicamente la localización de los establecimientos de salud no permite caracterizar adecuadamente la proximidad de la población a la oferta sanitaria.
+
+La siguiente figura muestra la densidad poblacional por radio censal, expresada en habitantes por hectárea.
+
+![Densidad poblacional por radio censal](outputs/maps/densidad_poblacion.png)
+
+*Figura 1. Densidad poblacional por radio censal en el partido de San Miguel. Fuente: elaboración propia sobre la base del Censo Nacional de Población, Hogares y Viviendas 2022 y cartografía del Geoportal de la Municipalidad de San Miguel.*
+
+### Población y red municipal de salud
+
+La población y los establecimientos sanitarios no se distribuyen homogéneamente dentro del partido. Para analizar esta configuración territorial, se combinaron los radios censales y su densidad poblacional con la localización de los establecimientos de la red municipal de salud. Se integró información georreferenciada de establecimientos sanitarios proveniente del Geoportal de la Municipalidad de San Miguel con información demográfica a nivel de radio censal.
+
+![Densidad poblacional y red municipal de salud](outputs/maps/densidad_pob_hospitales.png)
+
+*Figura 1. Densidad poblacional por radio censal y distribución de la red municipal de salud del partido de San Miguel. Fuente: elaboración propia a partir del Censo 2022 y del Geoportal de la Municipalidad de San Miguel.*
+
+### 1. Proximidad en línea recta (distancia euclídea)
+
+Para cada radio se utilizó un punto representativo de su geometría y se calculó la distancia euclídea al establecimiento sanitario más cercano. Los establecimientos se analizaron separadamente según correspondieran a atención de primer nivel u hospitales generales.
+Adicionalmente, se calculó una distancia media ponderada por la población de cada radio censal, de manera que las áreas con mayor población tuvieran una incidencia proporcionalmente mayor en el indicador agregado.
+Las distancias representan una aproximación a la accesibilidad geográfica y no equivalen a tiempos efectivos de viaje. Tampoco incorporan, en esta etapa, características como disponibilidad de turnos, capacidad, personal médico, horarios, transporte público o barreras físicas.
+
+
+**Tabla 2. Indicadores de proximidad territorial**
+
+| Indicador | Primer nivel | Hospitales generales |
+|---|---|---|
+| Distancia media por radio | 0,77 km | 1,68 km |
+| Distancia mediana | 0,71 km | 1,64 km |
+| Percentil 25 | 0,40 km | 1,12 km |
+| Percentil 75 | 1,10 km | 2,17 km |
+| Distancia máxima | 1,81 km | 4,60 km |
+| Media ponderada por población | 0,73 km | 1,75 km |
+
+**Tabla 3. Población según proximidad**
+
+| Distancia | Atención primaria | Hospitales generales |
+|---|---|---|
+| ≤ 0,5 km | 120.665 (37,0%) | 17.759 (5,4%) |
+| ≤ 1,0 km | 243.221 (74,6%) | 65.518 (20,1%) |
+| ≤ 1,5 km | 303.676 (93,1%) | 132.297 (40,6%) |
+| ≤ 2,0 km | 326.091 (100,0%) | 210.580 (64,6%) |
+
+La mayor proximidad a atención primaria no es evidencia, por sí misma, de insuficiencia hospitalaria: ambos niveles tienen funciones distintas.
+
+<details>
+<summary>Barrios con población en radios más alejados (línea recta)</summary>
+
+**Tabla 4. Barrios con población a más de 2 km del hospital general más cercano**
+
+| Barrio | Población >2 km | % del barrio | Distancia media |
+|---|---|---|---|
+| Lomas de Mariló | 4.579 | 100% | 3,81 km |
+| Parque La Luz | 8.118 | 100% | 3,55 km |
+| San Ambrosio | 5.976 | 100% | 3,10 km |
+| Obligado | 18.671 | 96,7% | 2,53 km |
+| Santa Brígida | 16.773 | 87,7% | 2,67 km |
+| Muñiz Norte | 16.261 | 84,7% | 2,27 km |
+| Muñiz Oeste | 10.169 | 79,4% | 2,34 km |
+| Trujui | 5.131 | 64,9% | 2,37 km |
+| Bella Vista Oeste | 12.539 | 57,7% | 2,95 km |
+
+**Tabla 5. Barrios con población a más de 1,5 km del establecimiento de atención primaria más cercano**
+
+| Barrio | Población >1,5 km | % del barrio | Distancia media |
+|---|---|---|---|
+| San Miguel Norte | 5.922 | 19,7% | 1,60 km |
+| Parque Mataldi | 4.188 | 76,0% | 1,55 km |
+| Bella Vista Oeste | 3.963 | 18,2% | 1,69 km |
+| Muñiz Oeste | 3.015 | 23,5% | 1,57 km |
+| San Jorge | 2.882 | 43,7% | 1,69 km |
+| Bella Vista Norte | 1.529 | 6,7% | 1,65 km |
+| Santa Clara | 916 | 100% | 1,81 km |
+
+</details>
+
+### 2. Proximidad por red vial
+
+**Tabla 6. Distancia al hospital general más cercano: euclídea vs. red vial**
+
+| Indicador | Euclídea | Red vial |
+|---|---|---|
+| Media | 1,68 km | 2,15 km |
+| Mediana | 1,64 km | 2,06 km |
+| Percentil 25 | 1,12 km | 1,46 km |
+| Percentil 75 | 2,17 km | 2,76 km |
+| Máximo | 4,60 km | 10,37 km |
+
+**Tabla 7. Hospital general de menor distancia por red vial**
+
+| Hospital | Radios | Población | % población |
+|---|---|---|---|
+| Hospital Santa María | 123 | 148.607 | 45,6% |
+| Hospital Raúl Larcade | 118 | 96.449 | 29,6% |
+| Hospital San Miguel Arcángel | 85 | 81.035 | 24,9% |
+
+> Estos valores **no** representan población efectivamente atendida ni demanda hospitalaria.
+
+**Tabla 8. Población a más de 3 km por red vial del hospital general más cercano**
+
+| Barrio | Población >3 km | % del barrio | Distancia máxima |
+|---|---|---|---|
+| Obligado | 15.707 | 81,4% | 4,50 km |
+| Santa Brígida | 11.471 | 60,0% | 4,35 km |
+| Bella Vista Oeste | 10.785 | 49,7% | 10,37 km |
+| Parque La Luz | 8.118 | 100,0% | 4,77 km |
+| San Ambrosio | 5.976 | 100,0% | 4,22 km |
+| Muñiz Norte | 5.949 | 31,0% | 3,55 km |
+| Muñiz Oeste | 5.806 | 45,3% | 3,57 km |
+| Lomas de Mariló | 4.579 | 100,0% | 4,97 km |
+| Trujui | 1.553 | 19,6% | 3,07 km |
+| Sarmiento | 1.006 | 7,5% | 3,22 km |
+
+**Tabla 9. Población a más de 2 km por red vial del establecimiento de atención primaria más cercano**
+
+| Barrio | Población >2 km | % del barrio | Distancia máxima |
+|---|---|---|---|
+| Bella Vista Oeste | 4.565 | 21,0% | 6,12 km |
+| San Miguel Norte | 2.969 | 9,9% | 2,10 km |
+| San Jorge | 2.882 | 43,7% | 2,18 km |
+| Muñiz Oeste | 2.240 | 17,5% | 2,38 km |
+| San Miguel Oeste | 1.572 | 16,2% | 2,01 km |
+| Bella Vista Norte | 1.490 | 6,5% | 2,57 km |
+| Santa Clara | 916 | 100,0% | 2,12 km |
+
+**Lectura conjunta**
+
+- Parque La Luz, San Ambrosio y Lomas de Mariló tienen el 100% de su población a más de 3 km de un hospital general, pero **ninguno** tiene población a más de 2 km de atención primaria. Lo mismo ocurre, en menor grado, con Obligado y Santa Brígida.
+- Solo el **5,1%** de la población está a más de 2 km por red vial de un establecimiento de atención primaria.
+
+### 3. Cobertura de salud y necesidad potencial
+
+- **116.826** de 326.091 habitantes (**35,83%**) no tienen obra social, prepaga ni plan estatal.
+- A nivel de radio, el porcentaje varía entre **2,96% y 76,90%** (mediana **29,93%**).
+- Barrios con mayor proporción sin cobertura: Parque La Luz (63,1%), San Ambrosio (59,3%), Cuartel 2do Cándido Castelló (58,9%), Mitre (58,0%) y Obligado (54,0%).
+
+**Asociación entre necesidad potencial y distancia vial (Spearman)**
+
+| Nivel de atención | ρ | p-valor | Interpretación |
+|---|---|---|---|
+| Atención primaria | −0,489 | < 0,001 | Radios con más necesidad tienden a estar **más cerca** |
+| Hospitales generales | 0,239 | < 0,001 | Asociación positiva, de menor magnitud: más necesidad tiende a coincidir con **mayor distancia** |
+
+Los mapas bivariados señalan sectores de **Obligado, Parque La Luz, San Ambrosio, Lomas de Mariló y Santa Brígida** como los que combinan alta necesidad potencial y mayores distancias relativas a hospitales generales.
+
+---
+
+## ✅ Conclusiones
+
+1. La medición por **red vial** es una aproximación más realista que la línea recta: la distancia media a hospitales generales pasa de 1,68 a 2,15 km y la máxima de 4,60 a 10,37 km.
+2. El **Hospital Santa María** es el más cercano por red vial para el 45,6% de la población, seguido por Raúl Larcade (29,6%) y San Miguel Arcángel (24,9%).
+3. La red de **atención primaria** es descentralizada: la distancia vial media es de ~**1,02 km** y ~**94,9%** de la población está a ≤ 2 km. Persisten sectores con menor proximidad en Bella Vista Oeste, San Jorge, Muñiz Oeste, San Miguel Norte y otros.
+4. La **necesidad potencial** (población sin cobertura) no se distribuye de forma homogénea; hay radios donde supera el 70%.
+5. La atención primaria tiende a acercarse a las zonas de mayor dependencia potencial del sistema público, pero **esto no se reproduce para los hospitales generales**. La proximidad al primer nivel no sustituye el acceso a prestaciones de mayor complejidad.
+
+---
+
+## ⚠️ Limitaciones
+
+- Las distancias son **aproximaciones de proximidad geográfica**, no tiempos de viaje.
+- Se usa **un punto interior por radio censal**, no la ubicación real de los habitantes: los resultados no son distancias individuales.
+- No se incorporan transporte público, barreras físicas, disponibilidad de turnos, horarios, capacidad, personal médico ni diferencias en las prestaciones de cada establecimiento.
+- Los umbrales (2 km, 3 km) y los terciles son **descriptivos y relativos**, no estándares normativos de accesibilidad.
+- Se excluyen Campo de Mayo y Macabi del análisis conjunto (0,48% de la población).
+- Los resultados indican accesibilidad **territorial potencial**, no acceso efectivo.
+
+---
+
+## 🚀 Próximos pasos
+
+- Incorporar **capacidad asistencial** (profesionales, horas médicas, consultas, turnos disponibles).
+- Implementar un modelo **Two-Step Floating Catchment Area (2SFCA)** que combine oferta, demanda y distancia.
+- Evaluar tiempos de viaje y transporte público.
+- Mejorar la representación de la población dentro de radios extensos.
+
+---
+
+## 📚 Fuentes
+
+- Geoportal de la Municipalidad de San Miguel.
+- INDEC. Censo Nacional de Población, Hogares y Viviendas 2022. Procesamiento con REDATAM.
+- © colaboradores de OpenStreetMap, procesado con [OSMnx](https://github.com/gboeing/osmnx).
+
+> *Elaboración propia.*
+
