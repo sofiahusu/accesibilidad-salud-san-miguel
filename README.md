@@ -143,6 +143,12 @@ Las distancias representan una aproximación a la accesibilidad geográfica y no
 | Percentil 75 | 1,10 km | 2,17 km |
 | Distancia máxima | 1,81 km | 4,60 km |
 | Media ponderada por población | 0,73 km | 1,75 km |
+Fuente: elaboración propia sobre la base de datos del Geoportal de la Municipalidad de San Miguel y datos poblacionales del Censo Nacional 2022.
+Nota: ante la ausencia de información sobre la localización exacta de la población dentro de cada radio censal, se utilizó un punto interior representativo de cada polígono para el cálculo de las distancias. Por lo tanto, los resultados deben interpretarse como indicadores aproximados de proximidad territorial a nivel de radio censal y no como distancias individuales de los habitantes.
+
+La distancia media ponderada por población al establecimiento de primer nivel más cercano fue de aproximadamente 0,73 km, mientras que para los hospitales generales alcanzó 1,75 km.
+Asimismo, el 75% de los radios censales se encuentra a una distancia inferior a aproximadamente 1,10 km de un establecimiento de primer nivel. En el caso de los hospitales generales, ese valor asciende a 2,17 km. La mayor distancia observada fue de 1,81 km para atención primaria y 4,60 km para hospitales generales.
+
 
 **Tabla 3. Población según proximidad**
 
@@ -152,8 +158,22 @@ Las distancias representan una aproximación a la accesibilidad geográfica y no
 | ≤ 1,0 km | 243.221 (74,6%) | 65.518 (20,1%) |
 | ≤ 1,5 km | 303.676 (93,1%) | 132.297 (40,6%) |
 | ≤ 2,0 km | 326.091 (100,0%) | 210.580 (64,6%) |
+**Fuente:** elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel y del Censo Nacional de Población, Hogares y Viviendas 2022 (INDEC).
 
-La mayor proximidad a atención primaria no es evidencia, por sí misma, de insuficiencia hospitalaria: ambos niveles tienen funciones distintas.
+- **74,6%** de la población analizada se encuentra en radios cuyo punto representativo está a ≤1 km de un establecimiento de atención primaria.
+- Esa proporción alcanza el **93,1% a ≤1,5 km** y el **100% a ≤2 km**.
+- Para los hospitales generales, solo el **20,1%** se encuentra a ≤1 km y el **64,6% a ≤2 km**.
+
+La comparación muestra una diferencia territorial clara entre ambos niveles. La red de atención primaria presenta una mayor proximidad geográfica respecto de la distribución de la población, mientras que los hospitales generales presentan áreas de influencia territorialmente más extensas.
+
+Esto no implica por sí mismo insuficiencia hospitalaria: los hospitales generales concentran prestaciones de mayor complejidad y cumplen una función diferente dentro de la red sanitaria.
+![Distancia a atención primaria](outputs/maps/dist_atencion.png)
+
+*Figura 3. Distancia al establecimiento de atención primaria más cercano. Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel.*
+
+![Distancia a hospitales generales](outputs/maps/dist_hospital.png)
+
+*Figura 4. Distancia al hospital general municipal más cercano. Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel.*
 
 <details>
 <summary>Barrios con población en radios más alejados (línea recta)</summary>
@@ -183,10 +203,16 @@ La mayor proximidad a atención primaria no es evidencia, por sí misma, de insu
 | San Jorge | 2.882 | 43,7% | 1,69 km |
 | Bella Vista Norte | 1.529 | 6,7% | 1,65 km |
 | Santa Clara | 916 | 100% | 1,81 km |
-
+**Fuente:** elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel y del Censo Nacional de Población, Hogares y Viviendas 2022 (INDEC).
 </details>
+El análisis por barrio permite identificar algunos contrastes territoriales. En el caso de los hospitales generales, **Lomas de Mariló, Parque La Luz y San Ambrosio** presentan el 100% de su población analizada en radios ubicados a más de 2 km en línea recta del hospital general más cercano. También se observan proporciones elevadas en **Obligado (96,7%)** y **Santa Brígida (87,7%)**.
+
+Las diferencias son considerablemente menores para atención primaria: los radios situados a más de 1,5 km se concentran en un conjunto más reducido de barrios.
 
 ### 2. Proximidad por red vial
+Anteriormente, se utilizó la distancia euclídea o distancia en línea recta para aproximar la proximidad de la población a los establecimientos de salud. Sin embargo, esta medida no considera la configuración de la red vial ni los recorridos que efectivamente deben realizarse para desplazarse entre dos puntos. Por este motivo, se amplió el análisis incorporando distancias calculadas sobre la red vial.
+Para ello se utilizó OSMnx, un paquete de Python de código abierto que permite descargar, modelar, analizar y visualizar redes de calles y otros datos espaciales provenientes de OpenStreetMap.
+Para cada radio censal se calculó la ruta de menor distancia por red vial hacia cada uno de los tres hospitales generales municipales considerados (Hospital Raúl Larcade, Hospital San Miguel Arcángel y Hospital Santa María) y se seleccionó aquel que presentaba la menor distancia vial. De esta manera, el indicador incorpora la configuración de la red de calles y los posibles rodeos derivados de su estructura, en lugar de asumir un desplazamiento directo en línea recta.
 
 **Tabla 6. Distancia al hospital general más cercano: euclídea vs. red vial**
 
@@ -197,6 +223,12 @@ La mayor proximidad a atención primaria no es evidencia, por sí misma, de insu
 | Percentil 25 | 1,12 km | 1,46 km |
 | Percentil 75 | 2,17 km | 2,76 km |
 | Máximo | 4,60 km | 10,37 km |
+Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel, Censo Nacional 2022 y red vial de OpenStreetMap.
+
+La incorporación de la red vial muestra que la distancia en línea recta puede subestimar de manera importante la separación territorial efectiva entre población y establecimientos.
+La distancia media al hospital general más cercano aumenta de **1,68 km en línea recta a 2,15 km por red vial**, aproximadamente un **28%**.
+La diferencia es especialmente importante en el extremo de la distribución: la distancia máxima pasa de **4,60 km a 10,37 km**.
+
 
 **Tabla 7. Hospital general de menor distancia por red vial**
 
@@ -205,8 +237,13 @@ La mayor proximidad a atención primaria no es evidencia, por sí misma, de insu
 | Hospital Santa María | 123 | 148.607 | 45,6% |
 | Hospital Raúl Larcade | 118 | 96.449 | 29,6% |
 | Hospital San Miguel Arcángel | 85 | 81.035 | 24,9% |
+**Fuente:** elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel, Censo Nacional 2022 (INDEC) y OpenStreetMap. 
 
-> Estos valores **no** representan población efectivamente atendida ni demanda hospitalaria.
+El **Hospital Santa María** resulta ser el hospital general de menor distancia vial para radios que concentran aproximadamente **148.607 habitantes (45,6% de la población analizada)**. Le siguen el Hospital Raúl Larcade, con **29,6%**, y el Hospital San Miguel Arcángel, con **24,9%**.
+Los resultados muestran una configuración territorial diferente entre los establecimientos de atención primaria y los hospitales generales municipales. La red de atención primaria presenta una distribución más descentralizada, con establecimientos próximos incluso a sectores que registran mayores distancias respecto de los hospitales generales. 
+![Distancia a hospitales generales por red vial](outputs/maps/dist_min_hospital.png)
+
+La distribución espacial de las distancias por red vial muestra diferencias territoriales en la proximidad a los hospitales generales municipales. Los radios ubicados en torno a los tres establecimientos presentan, en general, menores recorridos viales, mientras que las mayores distancias tienden a concentrarse en sectores más alejados de estos puntos.
 
 **Tabla 8. Población a más de 3 km por red vial del hospital general más cercano**
 
