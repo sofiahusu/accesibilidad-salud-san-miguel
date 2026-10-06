@@ -254,7 +254,7 @@ La diferencia es especialmente importante en el extremo de la distribución: la 
 El **Hospital Santa María** resulta ser el hospital general de menor distancia vial para radios que concentran aproximadamente **148.607 habitantes (45,6% de la población analizada)**. Le siguen el Hospital Raúl Larcade, con **29,6%**, y el Hospital San Miguel Arcángel, con **24,9%**.
 Los resultados muestran una configuración territorial diferente entre los establecimientos de atención primaria y los hospitales generales municipales. La red de atención primaria presenta una distribución más descentralizada, con establecimientos próximos incluso a sectores que registran mayores distancias respecto de los hospitales generales. 
 
-Figura 3. Distancia mínima por red vial al hospital general municipal más cercano por radio censal. Partido de San Miguel. 
+Figura 5. Distancia mínima por red vial al hospital general municipal más cercano por radio censal. Partido de San Miguel. 
 ![Distancia a hospitales generales por red vial](outputs/maps/dist_min_hospital.png)
 Fuente: elaboración propia sobre la base del Geoportal de la Municipalidad de San Miguel, datos del Censo Nacional 2022 y red vial de OpenStreetMap, procesada mediante OSMnx.
 Nota: las distancias corresponden al recorrido vial mínimo entre el nodo de la red más próximo al punto representativo de cada radio censal y el nodo más próximo al hospital general municipal seleccionado.
@@ -317,16 +317,42 @@ Se utilizó la información de REDACAM- Censo 2022, para conocer la cobertura de
 - A nivel de radio, el porcentaje varía entre **2,96% y 76,90%** (mediana **29,93%**).
 - Barrios con mayor proporción sin cobertura: Parque La Luz (63,1%), San Ambrosio (59,3%), Cuartel 2do Cándido Castelló (58,9%), Mitre (58,0%) y Obligado (54,0%).
 
-**Asociación entre necesidad potencial y distancia vial (Spearman)**
-Se utilizó la información de REDACAM- Censo 2022, para conocer la cobertura de salud en cada uno de los radios censales de San Miguel. Como indicador de necesidad potencial de utilización del sistema público se consideró el porcentaje de población que declaró no tener obra social, prepaga ni plan estatal de salud.
+Figura 6. Porcentaje de población sin obra social, prepaga ni plan estatal de salud por radio censal.
+![Población sin cobertura de salud](outputs/maps/pob_sin_obra_social.png)
+Fuente: elaboración propia sobre la base de INDEC, Censo Nacional 2022 – REDATAM.
 
-| Nivel de atención | ρ | p-valor | Interpretación |
-|---|---|---|---|
-| Atención primaria | −0,489 | < 0,001 | Radios con más necesidad tienden a estar **más cerca** |
-| Hospitales generales | 0,239 | < 0,001 | Asociación positiva, de menor magnitud: más necesidad tiende a coincidir con **mayor distancia** |
+### Necesidad potencial y accesibilidad territorial
 
-Los mapas bivariados señalan sectores de **Obligado, Parque La Luz, San Ambrosio, Lomas de Mariló y Santa Brígida** como los que combinan alta necesidad potencial y mayores distancias relativas a hospitales generales.
+Para identificar territorios donde coinciden mayores necesidades potenciales y menor proximidad geográfica, se combinaron ambas dimensiones mediante mapas bivariados. Tanto la distancia como el porcentaje de población sin cobertura fueron clasificados en terciles.
 
+#### Atención primaria
+
+Figura 6. Necesidad potencial y distancia vial al establecimiento de atención primaria más cercano.
+![Necesidad potencial y distancia a atención primaria](outputs/maps/mapa_bivariado1.png)
+Fuente: elaboración propia sobre la base de INDEC–REDATAM, Geoportal de la Municipalidad de San Miguel y OpenStreetMap.
+
+#### Hospitales generales
+
+Figura 7. Necesidad potencial y distancia vial al hospital general municipal más cercano.
+![Necesidad potencial y distancia a hospitales generales](outputs/maps/mapa_bivariado2.png)
+Fuente: elaboración propia sobre la base de INDEC–REDATAM, Geoportal de la Municipalidad de San Miguel y OpenStreetMap.
+
+**Tabla 10. Asociación entre necesidad potencial y distancia vial**
+
+| Nivel de atención | ρ de Spearman | p-valor |
+|---|---:|---:|
+| Atención primaria | −0,489 | <0,001 |
+| Hospitales generales | 0,239 | <0,001 |
+
+**Fuente:** elaboración propia sobre la base de INDEC–REDATAM, Geoportal de la Municipalidad de San Miguel y OpenStreetMap.
+
+Los resultados muestran dos patrones territoriales diferentes.
+
+En **atención primaria**, la asociación es negativa y de magnitud moderada (ρ = −0,489): los radios con mayor porcentaje de población sin cobertura tienden a encontrarse a menor distancia de un establecimiento de primer nivel.
+
+En cambio, para los **hospitales generales** la asociación es positiva, aunque más débil (ρ = 0,239): una mayor necesidad potencial tiende a coincidir con mayores distancias.
+
+El mapa permite identificar particularmente sectores de **Obligado, Parque La Luz, San Ambrosio, Lomas de Mariló y Santa Brígida** donde coinciden niveles elevados de necesidad potencial con mayores distancias relativas a hospitales generales.
 ---
 
 ## ✅ Conclusiones
