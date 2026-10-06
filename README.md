@@ -1,6 +1,9 @@
 # Accesibilidad territorial a los servicios de salud de San Miguel
 Análisis geoespacial de la proximidad de la población del partido de San Miguel (Buenos Aires, Argentina) a la red municipal de salud, combinando distancias euclídeas, distancias por red vial y una aproximación a la necesidad potencial de uso del sistema público.
 
+Año de referencia de los datos: Censo 2022
+Fecha de realización: octubre de 2026
+
 ## Pregunta principal
 ¿Qué tan accesible es territorialmente la red municipal de salud para la población de San Miguel y qué áreas presentan menor proximidad relativa a los establecimientos sanitarios?
 El objetivo es identificar diferencias territoriales en la proximidad a la red municipal de salud y detectar áreas que podrían requerir un análisis prioritario desde la gestión.
@@ -40,6 +43,19 @@ El objetivo es identificar diferencias territoriales en la proximidad a la red m
 | Censo Nacional de Población, Hogares y Viviendas 2022 (INDEC) | Población por radio censal |
 | REDATAM – Censo 2022 | Cobertura de salud por radio censal |
 | OpenStreetMap (vía OSMnx) | Red vial apta para circulación vehicular |
+
+### Archivos utilizados.
+El análisis combina información proveniente de distintas bases de datos:
+
+- **`radios2022_envejecimiento.gpkg`**: base geoespacial con información demográfica del Censo 2022 a nivel de radio censal. Se filtraron los registros correspondientes al partido de San Miguel y se utilizaron principalmente las variables de población y densidad poblacional. Disponible para su descarga en este link: https://rdu.unc.edu.ar/bitstreams/5e626c56-1af8-4ab8-91a4-afbe9917595d/download 
+
+- **`radios_san_miguel.geojson`**: capa de radios censales obtenida del Geoportal de la Municipalidad de San Miguel. Se utilizó para incorporar la identificación de los barrios y complementar la información territorial de cada radio censal. (Disponible en este repositorio, carpeta "datos")
+
+- **`cobertura_salud.xlsx`**: extracción realizada mediante REDATAM a partir del Censo 2022. El archivo original contiene información de cobertura de salud por radio censal para múltiples partidos. Los radios correspondientes al partido de San Miguel fueron identificados mediante su código geográfico, cuyo prefijo es **`06760`**, y posteriormente filtrados y procesados en Python. Se identificaron 328 radios censales correspondientes al partido. (Disponible en este repositorio, carpeta "datos")
+- 
+Las distintas bases fueron vinculadas mediante los códigos de radio censal (`CRO` / `clave`). Para el análisis espacial conjunto se utilizaron **326 radios censales**, equivalentes al **99,52% de la población considerada**. Campo de Mayo y Macabi fueron excluidos por no estar presentes en la base geoespacial utilizada.
+
+La red vial utilizada para calcular las distancias por caminos se obtuvo directamente de **OpenStreetMap mediante OSMnx**, por lo que no corresponde a un archivo almacenado originalmente en la carpeta de datos.
 
 ### Establecimientos considerados
 
