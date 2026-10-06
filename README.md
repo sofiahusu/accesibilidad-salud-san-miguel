@@ -83,6 +83,8 @@ El objetivo es identificar diferencias territoriales en la proximidad a la red m
 | Hospital de Día Salud Mental | Hospital especializado |
 | Nunca es Tarde (NET) | Hospital especializado |
 
+</details>
+
 > Los análisis comparan **atención primaria** vs. **hospitales generales** por separado, ya que cumplen funciones distintas dentro del sistema sanitario.
 
 ## 🧪 Metodología
