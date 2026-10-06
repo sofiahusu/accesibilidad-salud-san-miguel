@@ -357,39 +357,40 @@ El mapa permite identificar particularmente sectores de **Obligado, Parque La Lu
 
 ## ✅ Conclusiones
 
-1. La medición por **red vial** es una aproximación más realista que la línea recta: la distancia media a hospitales generales pasa de 1,68 a 2,15 km y la máxima de 4,60 a 10,37 km.
-2. El **Hospital Santa María** es el más cercano por red vial para el 45,6% de la población, seguido por Raúl Larcade (29,6%) y San Miguel Arcángel (24,9%).
-3. La red de **atención primaria** es descentralizada: la distancia vial media es de ~**1,02 km** y ~**94,9%** de la población está a ≤ 2 km. Persisten sectores con menor proximidad en Bella Vista Oeste, San Jorge, Muñiz Oeste, San Miguel Norte y otros.
-4. La **necesidad potencial** (población sin cobertura) no se distribuye de forma homogénea; hay radios donde supera el 70%.
-5. La atención primaria tiende a acercarse a las zonas de mayor dependencia potencial del sistema público, pero **esto no se reproduce para los hospitales generales**. La proximidad al primer nivel no sustituye el acceso a prestaciones de mayor complejidad.
+1. La incorporación de la **red vial modifica de manera relevante la medición de la accesibilidad territorial**. Para los hospitales generales, la distancia media aumenta de **1,68 km en línea recta a 2,15 km por red vial**, mientras que la distancia máxima pasa de **4,60 km a 10,37 km**. Esto muestra que la proximidad geométrica puede subestimar las distancias asociadas a la configuración efectiva de la red vial.
+
+2. La población presenta una **mayor proximidad territorial a los establecimientos de atención primaria que a los hospitales generales**. La distancia vial media al primer nivel es de aproximadamente **1,02 km** y el **94,9% de la población analizada se encuentra a ≤2 km**. Las mayores distancias relativas se concentran principalmente en sectores de Bella Vista Oeste, San Jorge, Muñiz Oeste y San Miguel Norte.
+
+3. Para los hospitales generales se observa una mayor heterogeneidad territorial. El **Hospital Santa María** resulta el establecimiento de menor distancia vial para radios que concentran el **45,6% de la población analizada**, seguido por Raúl Larcade (29,6%) y San Miguel Arcángel (24,9%). Estas proporciones representan proximidad territorial y no población efectivamente atendida.
+
+4. La **necesidad potencial de utilización del sistema público**, aproximada mediante la población sin obra social, prepaga ni plan estatal, presenta una marcada heterogeneidad espacial. El **35,83% de la población analizada** se encuentra en esta situación y, en algunos radios censales, la proporción supera el **70%**.
+
+5. La relación entre necesidad potencial y accesibilidad difiere según el nivel de atención. Para la **atención primaria**, una mayor proporción de población sin cobertura se asocia con menores distancias al establecimiento más cercano (**ρ = −0,489; p < 0,001**). Para los **hospitales generales**, la asociación es positiva y de menor magnitud (**ρ = 0,239; p < 0,001**), indicando que una mayor necesidad potencial tiende a coincidir con mayores distancias.
+
+6. El análisis conjunto permite identificar sectores de **Obligado, Parque La Luz, San Ambrosio, Lomas de Mariló y Santa Brígida** donde coinciden elevada necesidad potencial y mayores distancias relativas a hospitales generales. Al mismo tiempo, varios de estos sectores presentan buena proximidad al primer nivel, mostrando que **la accesibilidad territorial no es uniforme entre niveles de atención** y que la cercanía a atención primaria no equivale a proximidad a prestaciones hospitalarias de mayor complejidad.
 
 ---
 
 ## ⚠️ Limitaciones
 
-- Las distancias son **aproximaciones de proximidad geográfica**, no tiempos de viaje.
+- Las distancias estimadas representan **proximidad geográfica**, no tiempos efectivos de viaje ni acceso efectivo a los servicios de salud.
 - Se usa **un punto interior por radio censal**, no la ubicación real de los habitantes: los resultados no son distancias individuales.
 - No se incorporan transporte público, barreras físicas, disponibilidad de turnos, horarios, capacidad, personal médico ni diferencias en las prestaciones de cada establecimiento.
 - Los umbrales (2 km, 3 km) y los terciles son **descriptivos y relativos**, no estándares normativos de accesibilidad.
 - Se excluyen Campo de Mayo y Macabi del análisis conjunto (0,48% de la población).
-- Los resultados indican accesibilidad **territorial potencial**, no acceso efectivo.
 
 ---
 
 ## 🚀 Próximos pasos
 
-- Incorporar **capacidad asistencial** (profesionales, horas médicas, consultas, turnos disponibles).
+- Incorporar **capacidad asistencial** (profesionales, horas médicas, consultas, turnos disponibles). (Actualmente no disponible de forma abierta para todos los centros analizados).
 - Implementar un modelo **Two-Step Floating Catchment Area (2SFCA)** que combine oferta, demanda y distancia.
 - Evaluar tiempos de viaje y transporte público.
-- Mejorar la representación de la población dentro de radios extensos.
 
 ---
 
 ## 📚 Fuentes
 
-- Geoportal de la Municipalidad de San Miguel.
-- INDEC. Censo Nacional de Población, Hogares y Viviendas 2022. Procesamiento con REDATAM.
-- © colaboradores de OpenStreetMap, procesado con [OSMnx](https://github.com/gboeing/osmnx).
-
-> *Elaboración propia.*
-
+- **Municipalidad de San Miguel – Geoportal:** ubicación y características de los establecimientos de la red municipal de salud y cartografía territorial utilizada en el análisis.
+- **INDEC – Censo Nacional de Población, Hogares y Viviendas 2022:** población y características demográficas por radio censal. La información sobre cobertura de salud fue procesada mediante **REDATAM**.
+- **OpenStreetMap:** red vial utilizada para el cálculo de distancias por caminos, procesada en Python mediante [OSMnx](https://github.com/gboeing/osmnx).
