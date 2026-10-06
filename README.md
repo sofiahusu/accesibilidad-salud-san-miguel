@@ -19,7 +19,7 @@ El objetivo es identificar diferencias territoriales en la proximidad a la red m
 - [Próximos pasos](#-próximos-pasos)
 - [Fuentes](#-fuentes)
 
-## 🔎 Resumen de hallazgos
+## Resumen de hallazgos
 
 | Indicador | Valor |
 |---|---|
@@ -32,7 +32,7 @@ El objetivo es identificar diferencias territoriales en la proximidad a la red m
 | Población a ≤ 2 km por red vial de atención primaria | **94,9%** |
 | Población sin obra social, prepaga ni plan estatal | **116.826 (35,83%)** |
 
-## 🗂️ Datos
+## Datos
 
 | Fuente | Uso |
 |---|---|
@@ -87,7 +87,7 @@ El objetivo es identificar diferencias territoriales en la proximidad a la red m
 
 > Los análisis comparan **atención primaria** vs. **hospitales generales** por separado, ya que cumplen funciones distintas dentro del sistema sanitario.
 
-## 🧪 Metodología
+## Metodología
 
 1. **Integración de datos**: establecimientos georreferenciados + población por radio censal (Censo 2022).
 2. **Punto representativo**: cada uno de los 326 radios censales se representa con un punto interior de su polígono.
@@ -106,7 +106,7 @@ El objetivo es identificar diferencias territoriales en la proximidad a la red m
 
 REDATAM identifica 328 radios; **Campo de Mayo** y **Macabi** no están en la capa geoespacial de 326 radios. Además, Campo de Mayo tiene una extensión muy superior a la de los radios urbanos, por lo que un único punto representativo sesgaría la estimación de distancia.
 
-## 📊 Resultados
+## Resultados
 
 ### Distribución territorial de la población
 
@@ -355,7 +355,7 @@ En cambio, para los **hospitales generales** la asociación es positiva, aunque 
 El mapa permite identificar particularmente sectores de **Obligado, Parque La Luz, San Ambrosio, Lomas de Mariló y Santa Brígida** donde coinciden niveles elevados de necesidad potencial con mayores distancias relativas a hospitales generales.
 ---
 
-## ✅ Conclusiones
+## Conclusiones
 
 1. La incorporación de la **red vial modifica de manera relevante la medición de la accesibilidad territorial**. Para los hospitales generales, la distancia media aumenta de **1,68 km en línea recta a 2,15 km por red vial**, mientras que la distancia máxima pasa de **4,60 km a 10,37 km**. Esto muestra que la proximidad geométrica puede subestimar las distancias asociadas a la configuración efectiva de la red vial.
 
@@ -371,7 +371,7 @@ El mapa permite identificar particularmente sectores de **Obligado, Parque La Lu
 
 ---
 
-## ⚠️ Limitaciones
+## Limitaciones
 
 - Las distancias estimadas representan **proximidad geográfica**, no tiempos efectivos de viaje ni acceso efectivo a los servicios de salud.
 - Se usa **un punto interior por radio censal**, no la ubicación real de los habitantes: los resultados no son distancias individuales.
@@ -381,7 +381,7 @@ El mapa permite identificar particularmente sectores de **Obligado, Parque La Lu
 
 ---
 
-## 🚀 Próximos pasos
+## Próximos pasos
 
 - Incorporar **capacidad asistencial** (profesionales, horas médicas, consultas, turnos disponibles). (Actualmente no disponible de forma abierta para todos los centros analizados).
 - Implementar un modelo **Two-Step Floating Catchment Area (2SFCA)** que combine oferta, demanda y distancia.
@@ -389,7 +389,7 @@ El mapa permite identificar particularmente sectores de **Obligado, Parque La Lu
 
 ---
 
-## 📚 Fuentes
+## Fuentes
 
 - **Municipalidad de San Miguel – Geoportal:** ubicación y características de los establecimientos de la red municipal de salud y cartografía territorial utilizada en el análisis.
 - **INDEC – Censo Nacional de Población, Hogares y Viviendas 2022:** población y características demográficas por radio censal. La información sobre cobertura de salud fue procesada mediante **REDATAM**.
