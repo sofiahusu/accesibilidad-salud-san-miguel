@@ -52,7 +52,7 @@ El análisis combina información proveniente de distintas bases de datos:
 - **`radios_san_miguel.geojson`**: capa de radios censales obtenida del Geoportal de la Municipalidad de San Miguel. Se utilizó para incorporar la identificación de los barrios y complementar la información territorial de cada radio censal. (Disponible en este repositorio, carpeta "datos")
 
 - **`cobertura_salud.xlsx`**: extracción realizada mediante REDATAM a partir del Censo 2022. El archivo original contiene información de cobertura de salud por radio censal para múltiples partidos. Los radios correspondientes al partido de San Miguel fueron identificados mediante su código geográfico, cuyo prefijo es **`06760`**, y posteriormente filtrados y procesados en Python. Se identificaron 328 radios censales correspondientes al partido. (Disponible en este repositorio, carpeta "datos")
-- 
+
 Las distintas bases fueron vinculadas mediante los códigos de radio censal (`CRO` / `clave`). Para el análisis espacial conjunto se utilizaron **326 radios censales**, equivalentes al **99,52% de la población considerada**. Campo de Mayo y Macabi fueron excluidos por no estar presentes en la base geoespacial utilizada.
 
 La red vial utilizada para calcular las distancias por caminos se obtuvo directamente de **OpenStreetMap mediante OSMnx**, por lo que no corresponde a un archivo almacenado originalmente en la carpeta de datos.
